@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.lab6_iot.databinding.ActivityMainBinding;
@@ -67,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
         }
 
+        Button boton2 = findViewById(R.id.registro);
+        boton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
+                startActivity(intent);
+            }
+        });
+
         binding.iniciarSesion.setOnClickListener(v -> {
             String email = binding.email.getEditableText().toString();
             String pass = binding.editTextContrasena.getEditableText().toString();
@@ -85,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                                     String email = user.getEmail();
                                     Log.d("msg-test", "El correo es: " + email);
 
-                                    db.collection("usuarios")
+                                    db.collection("users")
                                             .get()
                                             .addOnCompleteListener(task2 -> {
                                                 if (task2.isSuccessful()) {
